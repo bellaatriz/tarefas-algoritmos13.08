@@ -17,11 +17,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("update")
+        Debug.Log("update");
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
 
-        UnityEngine.vector3 direcao = new Vector3(x, 0, y);
+        UnityEngine.Vector3 direcao = new Vector3(x, 0, y);
         rb.AddForce(direcao * velocidade * Time.deltaTime, ForceMode.Impulse);
     }
 }
