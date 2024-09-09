@@ -13,20 +13,20 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("START");
+        Debug.Log("start");
         TryGetComponent(out rb);
     }
 
-    private void OncollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Chão")
+        if (!noChao && collision.gameObject.tag == "Chão")
         {
             noChao = true;
         }
     }
     void Update()
     {
-        Debug.Log("UPDATE");
+        Debug.Log("update");
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
@@ -35,8 +35,9 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && noChao == true)
         {
             rb.AddForce(Vector3.up * forcaPulo, ForceMode.Impulse);
+            noChao = false;
         }
-        if (transform.position.y < -5);
+        if (transform.position.y < -5)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
