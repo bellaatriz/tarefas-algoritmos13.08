@@ -9,27 +9,32 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI hud, MsgVitoria;
     public int restantes; 
 
+    public AudioClip Clipemoeda, clipvitoria;
+
+    AudioSource source;
+
     // Start is called before the first frame update
     void Start()
     {
+        TryGetComponent(out source);
         restantes = FindObjectsOfType<Moeda>().Length;
 
-        hud.text = $"Moedas Restantes: {restantes}";
+        hud.text = $"Moedas restantes:{restantes}";
     }
 
     public void SubtrairMoedas(int valor)
     {
-        restante -= valor;
+        restantes -= valor;
+        hud.text = $"Moedas restantes:{restantes}";
+        source.PlayOneShot(Clipemoeda);
 
         if (restantes <= 0)
         {
-            MsgVitoria.text
+            MsgVitoria.text = "Parabéns!";
+            source.Stop();
+            source.PlayOneShot(clipvitoria);
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
